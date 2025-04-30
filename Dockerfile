@@ -18,5 +18,32 @@ RUN wget https://ucstaff-my.sharepoint.com/:u:/g/personal/kalana_ratnayakemudiya
     unzip /world.zip && \
     rm /world.zip
 
+
+#############################################################################################################################
+#####
+#####   Remove workspace source and build files that are not relevent to running the system
+#####
+#############################################################################################################################
+
+RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /tmp/*
+RUN apt-get clean
+
+#---------------------------------------------------------------------------------------------------------------------------
+#----
+#----   Start final release image
+#----
+#---------------------------------------------------------------------------------------------------------------------------
+
+FROM ros:humble-ros-base-jammy as final
+
+ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+
+WORKDIR /
+
+COPY --from=base / /
+
+ENTRYPOINT [ "/ros_entrypoint.sh" ]
+
 # Run the Unity executable
 CMD ["/world/irs_test.x86_64"]

@@ -1,6 +1,6 @@
 services:
   irs-simulation:
-    image: ghcr.io/airesearchlab/industrial-robots-and-systems-world:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-world:humble
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
