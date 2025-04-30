@@ -14,8 +14,8 @@ RUN apt-get update && \
                                                wget \
                                                unzip
 
-RUN wget https://ucstaff-my.sharepoint.com/:u:/g/personal/kalana_ratnayakemudiyanselage_canberra_edu_au/EdWBTzu0FPpBrHChZehqxw8BRRqhmNlTlsv9jRrKp4EbeQ?e=dVROLI -O world.zip && \
-    unzip /world.zip -d /world && \
+RUN wget https://ucstaff-my.sharepoint.com/:u:/g/personal/kalana_ratnayakemudiyanselage_canberra_edu_au/EdWBTzu0FPpBrHChZehqxw8BRRqhmNlTlsv9jRrKp4EbeQ?download=1 -O world.zip && \
+    unzip /world.zip && \
     rm /world.zip
 
 # Run the Unity executable
