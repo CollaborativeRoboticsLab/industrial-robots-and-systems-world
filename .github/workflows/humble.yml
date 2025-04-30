@@ -17,7 +17,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  OWNER: airesearchlab
+  OWNER: collaborativeroboticslab
   IMAGE_NAME: industrial-robots-and-systems-world
 
 # https://docs.github.com/en/actions/using-jobs/using-concurrency
