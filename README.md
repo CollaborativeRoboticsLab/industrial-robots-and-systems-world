@@ -1,6 +1,6 @@
 # Industrial Robots and Systems Simulation World
 
-## Use image avaialble online
+## Use image available online
 
 ```bash
 docker compose pull
