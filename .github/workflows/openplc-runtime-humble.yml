@@ -1,4 +1,4 @@
-name: Humble Build
+name: OpenPLC Runtime Humble Build
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ on:
 env:
   REGISTRY: ghcr.io
   OWNER: collaborativeroboticslab
-  IMAGE_NAME: industrial-robots-and-systems-world
+  IMAGE_NAME: industrial-robots-and-systems-openplc-runtime
 
 # https://docs.github.com/en/actions/using-jobs/using-concurrency
 concurrency:
@@ -57,7 +57,7 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./openplc-runtime
           file: Dockerfile
           platforms: linux/amd64
           push: true

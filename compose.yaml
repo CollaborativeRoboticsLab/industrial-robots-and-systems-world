@@ -12,3 +12,34 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+
+  irs-openplc-runtime:
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime
+    restart: unless-stopped
+    network_mode: host
+
+  irs-openplc-editor:
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor
+    environment:
+      - PYTHONUNBUFFERED=1                # GUI related
+      - DISPLAY                           # GUI related
+      - QT_X11_NO_MITSHM=1                # GUI related
+      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
+      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+
+  omron_moma_ros2:
+    container_name: omron_moma_ros2
+    image: ghcr.io/collaborativeroboticslab/omron_moma_ros2:humble
+    command:
+      # - ros2 run tm_driver tm_driver robot_ip:=<robot_ip_address>
+      - ros2 launch tm12x_moveit_config tm12x_run_move_group_headless.launch.py robot_ip:=<robot_ip_address>
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - /dev:/dev
