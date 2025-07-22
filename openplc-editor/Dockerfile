@@ -24,7 +24,9 @@ RUN apt-get update && \
                                                 python3 \
                                                 python3-venv \
                                                 python3-dev \
-                                                python3-pip
+                                                python3-pip \
+                                                libxml2-dev \
+                                                libxslt1-dev
 
 RUN python3 -m pip install --upgrade pip setuptools wheel
 
@@ -33,7 +35,8 @@ RUN python3 -m pip install  --no-cache-dir  wxPython \
                                             future \
                                             matplotlib \
                                             zeroconf \
-                                            pyserial
+                                            pyserial \
+                                            attrdict
 
 # Clone the OpenPLC Runtime repository
 RUN git clone https://github.com/CollaborativeRoboticsLab/OpenPLC_Editor.git
@@ -42,7 +45,7 @@ RUN git clone https://github.com/CollaborativeRoboticsLab/OpenPLC_Editor.git
 WORKDIR /OpenPLC_Editor
 
 # compile matiec
-RUN ./install.sh
+RUN ./install_ansible.sh
 
 # Start the OpenPLC Editor
 WORKDIR /OpenPLC_Editor/editor
