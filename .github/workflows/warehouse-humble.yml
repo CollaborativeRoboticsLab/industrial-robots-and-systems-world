@@ -39,14 +39,29 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v4
 
-      - name: Get latest release asset URL
+      - name: Get latest release or prerelease asset URL
         id: get_asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RELEASE_API="https://api.github.com/repos/${{ github.repository }}/releases/latest"
-          ASSET_URL=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $RELEASE_API | jq -r '.assets[] | select(.name=="IRS_latest.zip") | .url')
+          REPO="CollaborativeRoboticsLab/industrial-robots-and-systems-world"
+          RELEASES_API="https://api.github.com/repos/$REPO/releases"
+
+          # Get most recent non-draft release (published or prerelease)
+          RELEASE_JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $RELEASES_API)
+          
+          # Filter out drafts, pick the latest, and find the matching asset
+          ASSET_URL=$(echo "$RELEASE_JSON" | \
+            jq -r '[.[] | select(.draft == false)][0].assets[]? | select(.name=="IRS_latest.zip") | .url')
+
+          if [ -z "$ASSET_URL" ]; then
+            echo "❌ Asset IRS_latest.zip not found in recent releases."
+            exit 1
+          fi
+
+          echo "✅ Found asset URL: $ASSET_URL"
           echo "ASSET_URL=$ASSET_URL" >> $GITHUB_ENV
+
 
       - name: Download IRS_latest.zip (private/public compatible)
         run: |
