@@ -2,15 +2,13 @@ name: Warehouse Humble Build
 
 on:
   workflow_dispatch:
-
   push:
-    branches: 
+    branches:
       - main
     paths-ignore:
       - README.md
-
   pull_request:
-    branches: 
+    branches:
       - main
     paths-ignore:
       - README.md
@@ -20,19 +18,16 @@ env:
   OWNER: collaborativeroboticslab
   IMAGE_NAME: industrial-robots-and-systems-warehouse
 
-# https://docs.github.com/en/actions/using-jobs/using-concurrency
 concurrency:
-  # only cancel in-progress jobs or runs for the current workflow - matches against branch & tags
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-  
-jobs:
 
+jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
+      contents: read  # needed to access repo releases
       packages: write
 
     steps:
@@ -40,13 +35,28 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          
+
       - name: Check out the repository
         uses: actions/checkout@v4
 
+      - name: Get latest release asset URL
+        id: get_asset
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_API="https://api.github.com/repos/${{ github.repository }}/releases/latest"
+          ASSET_URL=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $RELEASE_API | jq -r '.assets[] | select(.name=="IRS_latest.zip") | .url')
+          echo "ASSET_URL=$ASSET_URL" >> $GITHUB_ENV
+
+      - name: Download IRS_latest.zip (private/public compatible)
+        run: |
+          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/octet-stream" \
+               "$ASSET_URL" -o warehouse/IRS_latest.zip
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -54,11 +64,11 @@ jobs:
         run: |
           docker login --username ${{ env.OWNER }} --password ${{ secrets.ACCESS_TOKEN }} ghcr.io 
 
-      - name: Build and Push
+      - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./warehouse
-          file: Dockerfile
+          file: warehouse/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |

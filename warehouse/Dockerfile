@@ -11,30 +11,21 @@ RUN apt-get update && \
                                                x11-xserver-utils \
                                                ffmpeg \
                                                libsm6 \
-                                               wget \
                                                unzip
 
-RUN wget https://ucstaff-my.sharepoint.com/:u:/g/personal/kalana_ratnayakemudiyanselage_canberra_edu_au/EdWBTzu0FPpBrHChZehqxw8BRRqhmNlTlsv9jRrKp4EbeQ?download=1 -O world.zip && \
-    unzip /world.zip && \
+# Copy the pre-downloaded release ZIP
+COPY IRS_latest.zip /world.zip
+
+# Unzip and clean
+RUN unzip /world.zip -d /world && \
     rm /world.zip
 
-
-#############################################################################################################################
-#####
-#####   Remove workspace source and build files that are not relevent to running the system
-#####
-#############################################################################################################################
-
-RUN rm -rf /var/lib/apt/lists/*
-RUN rm -rf /tmp/*
-RUN apt-get clean
+# Clean up
+RUN rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    apt-get clean
 
 #---------------------------------------------------------------------------------------------------------------------------
-#----
-#----   Start final release image
-#----
-#---------------------------------------------------------------------------------------------------------------------------
-
 FROM ros:humble-ros-base-jammy as final
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp

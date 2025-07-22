@@ -14,12 +14,12 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
 
   irs-openplc-runtime:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime:humble
     restart: unless-stopped
     network_mode: host
 
   irs-openplc-editor:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:humble
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
