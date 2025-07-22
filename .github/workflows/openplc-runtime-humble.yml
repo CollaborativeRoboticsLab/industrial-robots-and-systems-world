@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./openplc-runtime
-          file: Dockerfile
+          file: openplc-runtime/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
