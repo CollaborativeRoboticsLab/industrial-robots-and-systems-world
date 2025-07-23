@@ -86,7 +86,7 @@ COPY /ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh
 
 # Set working directory
-WORKDIR /
+WORKDIR ${WORKSPACE_ROOT}
 
 # GUI environment
 ENV DISPLAY=:0
@@ -94,4 +94,3 @@ ENV QT_X11_NO_MITSHM=1
 
 # Entry point
 ENTRYPOINT ["/ros_entrypoint.sh"]
-CMD ["bash"]
