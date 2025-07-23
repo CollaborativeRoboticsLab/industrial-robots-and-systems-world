@@ -1,6 +1,6 @@
 services:
   irs-simulation:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-world:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-warehouse:humble
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
@@ -21,25 +21,31 @@ services:
   irs-openplc-editor:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:humble
     environment:
-      - PYTHONUNBUFFERED=1                # GUI related
-      - DISPLAY                           # GUI related
-      - QT_X11_NO_MITSHM=1                # GUI related
-      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
-      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
+      - PYTHONUNBUFFERED=1
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
     restart: unless-stopped
     privileged: true
     network_mode: host
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./openplc_data:/shared_folder         # ✅ bind mount to access data
 
   omron_moma_ros2:
-    container_name: omron_moma_ros2
-    image: ghcr.io/collaborativeroboticslab/omron_moma_ros2:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-omron-moma:humble
     command:
-      # - ros2 run tm_driver tm_driver robot_ip:=<robot_ip_address>
-      - ros2 launch tm12x_moveit_config tm12x_run_move_group_headless.launch.py robot_ip:=<robot_ip_address>
+      - ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
     restart: unless-stopped
     privileged: true
     network_mode: host
     volumes:
       - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw

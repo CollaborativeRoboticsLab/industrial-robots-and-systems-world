@@ -12,29 +12,29 @@ RUN git clone https://github.com/thiagoralves/OpenPLC_v3.git
 WORKDIR /OpenPLC_v3
 
 # Create a directory for persistent data
-RUN mkdir /docker_persistent
+RUN mkdir /shared_folder
 
-VOLUME /docker_persistent
+VOLUME /shared_folder
 
 # setup docker
 RUN ./install.sh docker \
-    && touch /docker_persistent/mbconfig.cfg \
-    && touch /docker_persistent/persistent.file \
-    && mkdir /docker_persistent/st_files \
-    && cp /OpenPLC_v3/webserver/openplc.db /docker_persistent/openplc.db \
+    && touch /shared_folder/mbconfig.cfg \
+    && touch /shared_folder/persistent.file \
+    && mkdir /shared_folder/st_files \
+    && cp /OpenPLC_v3/webserver/openplc.db /shared_folder/openplc.db \
     && mv /OpenPLC_v3/webserver/openplc.db /OpenPLC_v3/webserver/openplc_default.db \
-    && cp /OpenPLC_v3/webserver/dnp3.cfg /docker_persistent/dnp3.cfg \
+    && cp /OpenPLC_v3/webserver/dnp3.cfg /shared_folder/dnp3.cfg \
     && mv /OpenPLC_v3/webserver/dnp3.cfg /OpenPLC_v3/webserver/dnp3_default.cfg \
-    && cp -r /OpenPLC_v3/webserver/st_files/ /docker_persistent/st_files/ \
+    && cp -r /OpenPLC_v3/webserver/st_files/ /shared_folder/st_files/ \
     && mv /OpenPLC_v3/webserver/st_files /OpenPLC_v3/webserver/st_files_default \
-    && cp /OpenPLC_v3/webserver/active_program /docker_persistent/active_program \
+    && cp /OpenPLC_v3/webserver/active_program /shared_folder/active_program \
     && mv /OpenPLC_v3/webserver/active_program /OpenPLC_v3/webserver/active_program_default \
-    && ln -s /docker_persistent/mbconfig.cfg /OpenPLC_v3/webserver/mbconfig.cfg \
-    && ln -s /docker_persistent/persistent.file /OpenPLC_v3/webserver/persistent.file \
-    && ln -s /docker_persistent/openplc.db /OpenPLC_v3/webserver/openplc.db \
-    && ln -s /docker_persistent/dnp3.cfg /OpenPLC_v3/webserver/dnp3.cfg \
-    && ln -s /docker_persistent/st_files /OpenPLC_v3/webserver/st_files \
-    && ln -s /docker_persistent/active_program /OpenPLC_v3/webserver/active_program
+    && ln -s /shared_folder/mbconfig.cfg /OpenPLC_v3/webserver/mbconfig.cfg \
+    && ln -s /shared_folder/persistent.file /OpenPLC_v3/webserver/persistent.file \
+    && ln -s /shared_folder/openplc.db /OpenPLC_v3/webserver/openplc.db \
+    && ln -s /shared_folder/dnp3.cfg /OpenPLC_v3/webserver/dnp3.cfg \
+    && ln -s /shared_folder/st_files /OpenPLC_v3/webserver/st_files \
+    && ln -s /shared_folder/active_program /OpenPLC_v3/webserver/active_program
 
 # Set the entrypoint
 ENTRYPOINT ["./start_openplc.sh"]
