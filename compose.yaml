@@ -31,7 +31,7 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ./openplc_data:/shared_folder
+      - ./openplc_data:/editor_shared_folder
 
   omron_moma_ros2:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-omron-moma:humble
