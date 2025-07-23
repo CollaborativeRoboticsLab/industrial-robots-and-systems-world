@@ -11,7 +11,8 @@ RUN apt-get update && \
                                                x11-xserver-utils \
                                                ffmpeg \
                                                libsm6 \
-                                               unzip
+                                               unzip \
+                                               findutils
 
 # Copy the pre-downloaded release ZIP
 COPY IRS_latest.zip /world.zip
@@ -19,6 +20,12 @@ COPY IRS_latest.zip /world.zip
 # Unzip and clean
 RUN unzip /world.zip -d /world && \
     rm /world.zip
+
+# Find the actual simulation binary (irs_*.x86_64), set it executable, and symlink it as /entry
+RUN set -e && \
+    EXEC_PATH=$(find /world -type f -regex ".*/irs_.*\.x86_64$" | head -n 1) && \
+    chmod +x "$EXEC_PATH" && \
+    ln -s "$EXEC_PATH" /entry
 
 # Clean up
 RUN rm -rf /var/lib/apt/lists/* && \
@@ -36,5 +43,6 @@ COPY --from=base / /
 
 ENTRYPOINT [ "/ros_entrypoint.sh" ]
 
-# Run the Unity executable
-CMD ["/world/irs_test.x86_64"]
+# Run the detected simulation executable
+CMD ["/entry"]
+
