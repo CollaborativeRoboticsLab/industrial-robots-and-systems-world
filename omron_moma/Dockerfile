@@ -95,5 +95,4 @@ ENV QT_X11_NO_MITSHM=1
 # Entry point
 ENTRYPOINT ["/workspace_entrypoint.sh"]
 
-# Set working directory
-WORKDIR ${WORKSPACE_ROOT}
+CMD ["ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py"]
