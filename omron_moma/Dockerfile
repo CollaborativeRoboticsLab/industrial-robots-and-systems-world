@@ -78,19 +78,22 @@ ENV WORKSPACE_ROOT=/omron_ws
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ENV DEBIAN_FRONTEND=noninteractive
 
+WORKDIR /
+
 # Copy built workspace from base stage
 COPY --from=base / /
 
 # Optional: custom entrypoint (make sure this script exists)
-COPY /ros_entrypoint.sh /ros_entrypoint.sh
-RUN chmod +x /ros_entrypoint.sh
+COPY /workspace_entrypoint.sh /workspace_entrypoint.sh
 
-# Set working directory
-WORKDIR ${WORKSPACE_ROOT}
+RUN chmod +x /workspace_entrypoint.sh
 
 # GUI environment
 ENV DISPLAY=:0
 ENV QT_X11_NO_MITSHM=1
 
 # Entry point
-ENTRYPOINT ["/ros_entrypoint.sh"]
+ENTRYPOINT ["/workspace_entrypoint.sh"]
+
+# Set working directory
+WORKDIR ${WORKSPACE_ROOT}

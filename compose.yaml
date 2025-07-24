@@ -36,7 +36,10 @@ services:
   omron_moma_ros2:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-omron-moma:humble
     command:
-      - ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py
+      # - ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py
+      - bash
+    stdin_open: true
+    tty: true
     environment:
       - PYTHONUNBUFFERED=1
       - DISPLAY
