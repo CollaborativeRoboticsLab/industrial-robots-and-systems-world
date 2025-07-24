@@ -92,7 +92,7 @@ RUN chmod +x /workspace_entrypoint.sh
 ENV DISPLAY=:0
 ENV QT_X11_NO_MITSHM=1
 
+WORKDIR ${WORKSPACE_ROOT}
+
 # Entry point
 ENTRYPOINT ["/workspace_entrypoint.sh"]
-
-CMD ["ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py"]
