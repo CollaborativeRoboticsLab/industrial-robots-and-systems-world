@@ -35,10 +35,6 @@ services:
 
   omron_moma_ros2:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-omron-moma:humble
-    command:
-      - 
-    stdin_open: true
-    tty: true
     environment:
       - PYTHONUNBUFFERED=1
       - DISPLAY

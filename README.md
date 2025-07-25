@@ -12,11 +12,26 @@ On the terminal run the following command to clone the repo
 git clone https://github.com/CollaborativeRoboticsLab/industrial-robots-and-systems-world.git
 ```
 
-## Use image available online
+## Start the workspace
+
+Enter the folder
 
 ```bash
+cd industrial-robots-and-systems-world
+```
+
+Pull the latest docker containers
+```bash
 docker compose pull
+```
+
+Allow permission for UI interfaces from docker containers
+```bash
 xhost +local:root
+```
+
+Start the docker containers
+```bash
 docker compose up
 ```
 
@@ -27,3 +42,18 @@ Make sure to save the files created using the editor into `editor_shared_folder`
 Then the files will be available in the `industrial-robots-and-systems-world/openplc_data` folder.
 
 Access them from there
+
+
+## Stop the workspace
+
+Stop the docker containers
+
+```bash
+docker compose stop
+```
+
+Remove docker containers
+
+```bash
+docker compose down
+```
