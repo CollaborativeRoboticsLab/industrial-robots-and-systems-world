@@ -35,6 +35,29 @@ Start the docker containers
 docker compose up
 ```
 
+## Start the editor
+
+Enter the folder
+
+```bash
+cd industrial-robots-and-systems-world
+```
+
+Pull the latest docker containers
+```bash
+docker compose -f compose-editor.yaml pull
+```
+
+Allow permission for UI interfaces from docker containers
+```bash
+xhost +local:root
+```
+
+Start the docker containers
+```bash
+docker compose -f compose-editor.yaml up
+```
+
 ## Accessing the st files created by editor
 
 Make sure to save the files created using the editor into `editor_shared_folder`
@@ -50,10 +73,12 @@ Stop the docker containers
 
 ```bash
 docker compose stop
+docker compose -f compose-editor.yaml stop
 ```
 
 Remove docker containers
 
 ```bash
 docker compose down
+docker compose -f compose-editor.yaml down
 ```
