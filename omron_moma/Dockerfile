@@ -96,3 +96,5 @@ WORKDIR ${WORKSPACE_ROOT}
 
 # Entry point
 ENTRYPOINT ["/workspace_entrypoint.sh"]
+
+CMD ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py
