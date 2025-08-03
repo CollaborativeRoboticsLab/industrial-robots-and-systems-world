@@ -6,14 +6,16 @@ on:
   push:
     branches: 
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - omron_moma/**
+      - .github/workflows/omron-moma-humble.yml
 
   pull_request:
     branches: 
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - omron_moma/**
+      - .github/workflows/omron-moma-humble.yml
 
 env:
   REGISTRY: ghcr.io

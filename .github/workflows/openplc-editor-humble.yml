@@ -6,14 +6,16 @@ on:
   push:
     branches: 
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - openplc-editor/**
+      - .github/workflows/openplc-editor-humble.yml
 
   pull_request:
     branches: 
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - openplc-editor/**
+      - .github/workflows/openplc-editor-humble.yml
 
 env:
   REGISTRY: ghcr.io
