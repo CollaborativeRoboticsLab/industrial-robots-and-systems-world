@@ -91,6 +91,7 @@ RUN chmod +x /workspace_entrypoint.sh
 # GUI environment
 ENV DISPLAY=:0
 ENV QT_X11_NO_MITSHM=1
+ENV ROS_DOMAIN_ID=0
 
 WORKDIR ${WORKSPACE_ROOT}
 

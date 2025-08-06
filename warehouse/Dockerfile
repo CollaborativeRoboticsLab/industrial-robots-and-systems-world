@@ -36,6 +36,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
 FROM ros:humble-ros-base-jammy as final
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+ENV ROS_DOMAIN_ID=0
 
 WORKDIR /
 

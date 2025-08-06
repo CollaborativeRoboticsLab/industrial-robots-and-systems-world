@@ -7,6 +7,7 @@ services:
       - QT_X11_NO_MITSHM=1                # GUI related
       - NVIDIA_VISIBLE_DEVICES=all        # GUI related
       - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
+      - ROS_DOMAIN_ID=0
     restart: unless-stopped
     privileged: true
     network_mode: host
@@ -26,6 +27,7 @@ services:
       - QT_X11_NO_MITSHM=1
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all
+      - ROS_DOMAIN_ID=0
     restart: unless-stopped
     privileged: true
     network_mode: host
