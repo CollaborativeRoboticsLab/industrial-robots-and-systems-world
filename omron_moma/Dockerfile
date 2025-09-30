@@ -52,10 +52,10 @@ RUN apt-get update && apt-get install -y \
 # Create workspace and clone source
 WORKDIR ${WORKSPACE_ROOT}/src
 
-RUN git clone https://github.com/CollaborativeRoboticsLab/Omron_MoMa_ROS2.git && \
-    git clone https://github.com/CollaborativeRoboticsLab/Omron_AMR_ROS2.git && \
-    git clone https://github.com/CollaborativeRoboticsLab/Omron_TM_ROS2.git && \
-    git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_arm.git && \
+    git clone https://github.com/CollaborativeRoboticsLab/omron_base.git && \
+    git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git && \
+    git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
 
 WORKDIR ${WORKSPACE_ROOT}
 
@@ -98,4 +98,4 @@ WORKDIR ${WORKSPACE_ROOT}
 # Entry point
 ENTRYPOINT ["/workspace_entrypoint.sh"]
 
-CMD ros2 launch tm12x_moveit_config tm12x_run_move_group.launch.py
+CMD ros2 launch tm12x_moveit_config hand_solo_moveit.launch.py
