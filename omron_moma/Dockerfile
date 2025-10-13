@@ -99,4 +99,4 @@ WORKDIR ${WORKSPACE_ROOT}
 # Entry point
 ENTRYPOINT ["/workspace_entrypoint.sh"]
 
-CMD ros2 launch tm12x_moveit_config hand_solo_moveit.launch.py
+CMD ros2 launch moma_ros hand_solo_moveit.launch.py
