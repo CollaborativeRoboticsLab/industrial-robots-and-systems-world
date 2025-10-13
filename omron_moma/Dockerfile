@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y \
     ros-humble-tf2-tools \
     ros-humble-turtlebot3-msgs \
     ros-humble-turtlebot3-navigation2 \
+    ros-humble-teleop-twist-joy \
     libx11-dev \
     libxext-dev \
     libxtst-dev \
