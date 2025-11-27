@@ -82,3 +82,7 @@ Remove docker containers
 docker compose down
 docker compose -f compose-editor.yaml down
 ```
+
+## Changes
+
+- Removed `omron_moma` folder and replaced with the Docker image from now complete [CollaborativeRoboticsLab/omron_moma](https://github.com/CollaborativeRoboticsLab/omron_moma.git)
