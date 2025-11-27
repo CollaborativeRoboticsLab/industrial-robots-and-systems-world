@@ -19,18 +19,20 @@ services:
     restart: unless-stopped
     network_mode: host
 
-  omron_moma_ros2:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-omron-moma:humble
+  omron_moma:
+    container_name: omron_moma
+    image: ghcr.io/collaborativeroboticslab/omron_moma:humble
+    command: ros2 launch moma_ros ld250_tm12x.launch.py tm_use_simulation:=false use_rviz:=true use_moveit:=true use_nav2:=true
     environment:
-      - PYTHONUNBUFFERED=1
-      - DISPLAY
-      - QT_X11_NO_MITSHM=1
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=all
+      - PYTHONUNBUFFERED=1                # GUI related
+      - DISPLAY                           # GUI related
+      - QT_X11_NO_MITSHM=1                # GUI related
+      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
+      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
       - ROS_DOMAIN_ID=0
     restart: unless-stopped
     privileged: true
     network_mode: host
     volumes:
       - /dev:/dev
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
