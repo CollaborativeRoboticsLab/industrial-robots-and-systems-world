@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS base
+FROM ubuntu:noble AS base
 
 # Install necessary packages
 RUN apt-get update && \

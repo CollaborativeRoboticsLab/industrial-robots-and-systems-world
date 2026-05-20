@@ -1,6 +1,6 @@
 services:
   irs-openplc-editor:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:jazzy
     environment:
       - PYTHONUNBUFFERED=1
       - DISPLAY

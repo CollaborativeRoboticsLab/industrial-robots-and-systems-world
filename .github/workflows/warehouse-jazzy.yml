@@ -1,4 +1,4 @@
-name: Warehouse Humble Build
+name: Warehouse Jazzy Build
 
 on:
   workflow_dispatch:
@@ -7,14 +7,14 @@ on:
       - main
     paths:
       - warehouse/**
-      - .github/workflows/warehouse-humble.yml
+      - .github/workflows/warehouse-jazzy.yml
 
   pull_request:
     branches:
       - main
     paths:
       - warehouse/**
-      - .github/workflows/warehouse-humble.yml
+      - .github/workflows/warehouse-jazzy.yml
 
 env:
   REGISTRY: ghcr.io
@@ -91,4 +91,4 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:jazzy

@@ -1,5 +1,12 @@
 # Industrial Robots and Systems Simulation World
 
+This repo support multiple versions of ROS2. Select the branch matching the ROS2 version.
+
+| Branch | ROS2 Version |
+| --- | --- |
+| `main` | Jazzy Jalisco |
+| `humble` | Humble Hawksbill |
+
 ## Install Docker
 
 Follow the official instructions [here](https://docs.docker.com/engine/install/)

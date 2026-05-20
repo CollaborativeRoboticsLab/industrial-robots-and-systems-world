@@ -1,4 +1,4 @@
-FROM ros:humble-ros-base-jammy AS base
+FROM ros:jazzy AS base
 
 # Install necessary packages
 RUN apt-get update && \
@@ -33,7 +33,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean
 
 #---------------------------------------------------------------------------------------------------------------------------
-FROM ros:humble-ros-base-jammy as final
+FROM ros:jazzy as final
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ENV ROS_DOMAIN_ID=0

@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS base
+FROM ubuntu:noble AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPENPLC_DIR=/OpenPLC_Editor

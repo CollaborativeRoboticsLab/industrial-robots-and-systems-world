@@ -1,4 +1,4 @@
-name: OpenPLC Editor Humble Build
+name: OpenPLC Editor Jazzy Build
 
 on:
   workflow_dispatch:
@@ -8,14 +8,14 @@ on:
       - main
     paths:
       - openplc-editor/**
-      - .github/workflows/openplc-editor-humble.yml
+      - .github/workflows/openplc-editor-jazzy.yml
 
   pull_request:
     branches: 
       - main
     paths:
       - openplc-editor/**
-      - .github/workflows/openplc-editor-humble.yml
+      - .github/workflows/openplc-editor-jazzy.yml
 
 env:
   REGISTRY: ghcr.io
@@ -65,4 +65,4 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:jazzy

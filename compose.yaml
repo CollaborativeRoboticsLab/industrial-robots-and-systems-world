@@ -1,6 +1,6 @@
 services:
   irs-simulation:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-warehouse:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-warehouse:jazzy
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
@@ -15,13 +15,13 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
 
   irs-openplc-runtime:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime:humble
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime:jazzy
     restart: unless-stopped
     network_mode: host
 
   omron_handsolo:
     container_name: omron_handsolo
-    image: ghcr.io/collaborativeroboticslab/omron_handsolo:humble
+    image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
     command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_rviz:=true use_moveit:=true use_nav2:=true
     environment:
       - PYTHONUNBUFFERED=1                # GUI related

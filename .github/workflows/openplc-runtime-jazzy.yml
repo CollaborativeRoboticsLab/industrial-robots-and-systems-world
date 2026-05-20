@@ -1,4 +1,4 @@
-name: OpenPLC Runtime Humble Build
+name: OpenPLC Runtime Jazzy Build
 
 on:
   workflow_dispatch:
@@ -8,14 +8,14 @@ on:
       - main
     paths:
       - openplc-runtime/**
-      - .github/workflows/openplc-runtime-humble.yml
+      - .github/workflows/openplc-runtime-jazzy.yml
 
   pull_request:
     branches: 
       - main
     paths:
       - openplc-runtime/**
-      - .github/workflows/openplc-runtime-humble.yml
+      - .github/workflows/openplc-runtime-jazzy.yml
 
 
 env:
@@ -66,4 +66,4 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:jazzy
