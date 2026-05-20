@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - humble
     paths:
       - warehouse/**
       - .github/workflows/warehouse-humble.yml
 
   pull_request:
     branches:
-      - main
+      - humble
     paths:
       - warehouse/**
       - .github/workflows/warehouse-humble.yml
@@ -90,5 +90,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble

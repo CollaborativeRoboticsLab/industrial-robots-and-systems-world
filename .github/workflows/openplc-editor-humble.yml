@@ -5,14 +5,14 @@ on:
 
   push:
     branches: 
-      - main
+      - humble
     paths:
       - openplc-editor/**
       - .github/workflows/openplc-editor-humble.yml
 
   pull_request:
     branches: 
-      - main
+      - humble
     paths:
       - openplc-editor/**
       - .github/workflows/openplc-editor-humble.yml
@@ -64,5 +64,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
