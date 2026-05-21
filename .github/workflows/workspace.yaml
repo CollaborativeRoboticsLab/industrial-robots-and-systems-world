@@ -5,14 +5,14 @@ on:
 
   push:
     branches: 
-      - main
+      - humble
     paths:
       - workspace/**
       - .github/workflows/workspace.yml
 
   pull_request:
     branches: 
-      - main
+      - humble
     paths:
       - workspace/**
       - .github/workflows/workspace.yml
