@@ -37,9 +37,8 @@ RUN apt-get update && \
         rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
-ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ENV ROS_DOMAIN_ID=0
-ENV ROS_DISCOVERY_SERVER=127.0.0.1:11811
 ENV TERM=xterm-256color
 ENV NO_AT_BRIDGE=1
 ENV QT_X11_NO_MITSHM=1
@@ -50,7 +49,7 @@ ENV LC_ALL=C.UTF-8
 WORKDIR /workspace
 
 # Expose code-server port
-EXPOSE 8080
+EXPOSE 8888
 
 # Copy entrypoint script
 COPY ros_entrypoint.sh /ros_entrypoint.sh
