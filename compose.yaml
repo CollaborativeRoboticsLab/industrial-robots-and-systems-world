@@ -22,7 +22,7 @@ services:
   omron_handsolo:
     container_name: omron_handsolo
     image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
-    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_rviz:=true use_moveit:=true use_nav2:=true
+    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_arm:=true use_base:=true use_moveit:=true use_nav2:=true use_rviz:=true
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
@@ -36,3 +36,21 @@ services:
     volumes:
       - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+
+  omron-workspace:
+    image: ghcr.io/collaborativeroboticslab/omron-workspace:jazzy
+    environment:
+      - DISPLAY
+      - ROS_DOMAIN_ID=0
+      - NO_AT_BRIDGE=1
+      - QT_X11_NO_MITSHM=1
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    network_mode: host
+    volumes:
+      - /dev:/dev:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw                    # GUI related
+      - ./workspace/workspace:/workspace:rw
+      - ./workspace/code-server/config:/root/.config/code-server:rw
+      - ./workspace/code-server/data:/root/.local/share/code-server:rw

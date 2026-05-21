@@ -1,0 +1,68 @@
+name: Turtlebot4 Workspace Jazzy Build
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: 
+      - main
+    paths:
+      - workspace/**
+      - .github/workflows/workspace.yml
+
+  pull_request:
+    branches: 
+      - main
+    paths:
+      - workspace/**
+      - .github/workflows/workspace.yml
+
+
+env:
+  REGISTRY: ghcr.io
+  OWNER: collaborativeroboticslab
+  IMAGE_NAME: omron-workspace
+
+# https://docs.github.com/en/actions/using-jobs/using-concurrency
+concurrency:
+  # only cancel in-progress jobs or runs for the current workflow - matches against branch & tags
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
+jobs:
+
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Remove unnecessary files
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        run: |
+          docker login --username ${{ env.OWNER }} --password ${{ secrets.ACCESS_TOKEN }} ghcr.io 
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./workspace
+          file: workspace/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
