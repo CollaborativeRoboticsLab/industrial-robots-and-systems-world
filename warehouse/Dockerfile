@@ -3,16 +3,18 @@ FROM ros:jazzy AS base
 # Install necessary packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libx11-6 \
-                                               libxext6 \
-                                               libxrender1 \
-                                               libxtst6 \
-                                               libxi6 \
-                                               libgtk-3-0 \
-                                               x11-xserver-utils \
-                                               ffmpeg \
-                                               libsm6 \
-                                               unzip \
-                                               findutils
+    libxext6 \
+    libxrender1 \
+    libxtst6 \
+    libxi6 \
+    libgtk-3-0 \
+    x11-xserver-utils \
+    ffmpeg \
+    libsm6 \
+    unzip \
+    findutils \
+    ros-jazzy-rmw-fastrtps-cpp \
+    ros-jazzy-rmw-cyclonedds-cpp
 
 # Copy the pre-downloaded release ZIP
 COPY IRS_latest.zip /world.zip

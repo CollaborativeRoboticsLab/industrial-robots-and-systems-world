@@ -1,0 +1,13 @@
+2026-05-21 06:37:17.291 [info] Extension host with pid 53 started
+2026-05-21 06:37:17.291 [error] Error: EEXIST: file already exists, open '/root/.local/share/code-server/User/workspaceStorage/-3f5aa099/vscode.lock'
+2026-05-21 06:37:17.305 [info] Lock '/root/.local/share/code-server/User/workspaceStorage/-3f5aa099/vscode.lock': Lock acquired.
+2026-05-21 06:37:17.485 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2026-05-21 06:37:17.540 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2026-05-21 06:37:17.540 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2026-05-21 06:37:17.840 [info] Eager extensions activated
+2026-05-21 06:37:17.840 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2026-05-21 06:37:17.840 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2026-05-21 06:37:21.148 [info] ExtensionService#_doActivateExtension vscode.tunnel-forwarding, startup: false, activationEvent: 'onTunnel'
+2026-05-21 06:53:40.089 [info] Extension host terminating: received terminate message from renderer
+2026-05-21 06:53:40.090 [info] Lock '/root/.local/share/code-server/User/workspaceStorage/-3f5aa099/vscode.lock': Marking the lockfile as scheduled to be released in 6000 ms.
+2026-05-21 06:53:40.113 [info] Extension host with pid 53 exiting with code 0

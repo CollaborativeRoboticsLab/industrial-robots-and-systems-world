@@ -7,14 +7,17 @@ on:
       - main
     paths:
       - warehouse/**
-      - .github/workflows/warehouse-jazzy.yml
+      - .github/workflows/warehouse.yml
 
   pull_request:
     branches:
       - main
     paths:
       - warehouse/**
-      - .github/workflows/warehouse-jazzy.yml
+      - .github/workflows/warehouse.yml
+
+  release:
+    types: [published, released]
 
 env:
   REGISTRY: ghcr.io

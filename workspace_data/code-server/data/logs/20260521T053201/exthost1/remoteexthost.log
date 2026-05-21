@@ -1,0 +1,14 @@
+2026-05-21 05:32:05.954 [info] Extension host with pid 53 started
+2026-05-21 05:32:05.980 [info] Lock '/root/.local/share/code-server/User/workspaceStorage/-3f5aa099/vscode.lock': Lock acquired.
+2026-05-21 05:32:06.063 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2026-05-21 05:32:06.105 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2026-05-21 05:32:06.229 [info] Eager extensions activated
+2026-05-21 05:32:06.229 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2026-05-21 05:32:06.230 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2026-05-21 05:32:08.691 [info] ExtensionService#_doActivateExtension vscode.git, startup: false, activationEvent: 'api', root cause: vscode.github
+2026-05-21 05:33:25.259 [info] ExtensionService#_doActivateExtension vscode.tunnel-forwarding, startup: false, activationEvent: 'onTunnel'
+2026-05-21 05:34:08.451 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-05-21 05:34:08.452 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-05-21 05:34:08.452 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-05-21 05:34:08.452 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2026-05-21 05:34:36.118 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onTerminalQuickFixRequest:ms-vscode.npm-command'
