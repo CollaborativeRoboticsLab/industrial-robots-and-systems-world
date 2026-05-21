@@ -1,4 +1,4 @@
-name: Turtlebot4 Workspace Humble Build
+name: Omron Workspace Humble Build
 
 on:
   workflow_dispatch:
