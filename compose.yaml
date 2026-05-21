@@ -40,10 +40,12 @@ services:
   omron-workspace:
     image: ghcr.io/collaborativeroboticslab/omron-workspace:humble
     environment:
-      - DISPLAY
+      - PYTHONUNBUFFERED=1                # GUI related
+      - DISPLAY                           # GUI related
+      - QT_X11_NO_MITSHM=1                # GUI related
+      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
+      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
       - ROS_DOMAIN_ID=0
-      - NO_AT_BRIDGE=1
-      - QT_X11_NO_MITSHM=1
     restart: unless-stopped
     tty: true
     stdin_open: true
