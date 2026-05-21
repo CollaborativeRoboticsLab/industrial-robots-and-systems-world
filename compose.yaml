@@ -53,6 +53,6 @@ services:
     volumes:
       - /dev:/dev:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw                    # GUI related
-      - ./workspace/workspace:/workspace:rw
-      - ./workspace/code-server/config:/root/.config/code-server:rw
-      - ./workspace/code-server/data:/root/.local/share/code-server:rw
+      - ./workspace_data/workspace:/workspace:rw
+      - ./workspace_data/code-server/config:/root/.config/code-server:rw
+      - ./workspace_data/code-server/data:/root/.local/share/code-server:rw
