@@ -22,14 +22,15 @@ RUN apt-get update && \
             ros-${ROS_DISTRO}-teleop-twist-joy \
             ros-${ROS_DISTRO}-joy \
             curl \
-            ca-certificates && \    git \
+            ca-certificates \    
+            git \
             python3-pip \
             python3-colcon-common-extensions \
             python3-rosdep \
             python3-dev \
             build-essential \
             curl \
-            qtdeclarative5-dev \
+            qtdeclarative5-dev && \
         curl -fOL https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb && \
         apt-get install -y --no-install-recommends ./code-server_${CODE_SERVER_VERSION}_amd64.deb && \
         rm -f code-server_${CODE_SERVER_VERSION}_amd64.deb && \
