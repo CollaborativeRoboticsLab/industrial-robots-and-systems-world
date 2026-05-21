@@ -1,4 +1,4 @@
-name: Turtlebot4 Workspace Jazzy Build
+name: Omron Workspace Jazzy Build
 
 on:
   workflow_dispatch:
