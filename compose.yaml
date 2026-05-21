@@ -36,3 +36,24 @@ services:
     volumes:
       - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+
+  omron-workspace:
+    image: ghcr.io/collaborativeroboticslab/omron-workspace:humble
+    environment:
+      - DISPLAY
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - ROS_DISCOVERY_SERVER=${ROS_DISCOVERY_SERVER:-127.0.0.1:11811}
+      - NO_AT_BRIDGE=1
+      - QT_X11_NO_MITSHM=1
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    network_mode: host
+    ipc: host
+    volumes:
+      - /dev:/dev:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw                    # GUI related
+      - ./workspace/workspace:/workspace:rw
+      - ./workspace/code-server/config:/root/.config/code-server:rw
+      - ./workspace/code-server/data:/root/.local/share/code-server:rw
