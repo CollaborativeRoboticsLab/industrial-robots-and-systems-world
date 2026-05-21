@@ -8,14 +8,14 @@ on:
       - humble
     paths:
       - workspace/**
-      - .github/workflows/workspace.yml
+      - .github/workflows/workspace-humble.yml
 
   pull_request:
     branches: 
       - humble
     paths:
       - workspace/**
-      - .github/workflows/workspace.yml
+      - .github/workflows/workspace-humble.yml
 
 
 env:
@@ -65,5 +65,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:jazzy
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
