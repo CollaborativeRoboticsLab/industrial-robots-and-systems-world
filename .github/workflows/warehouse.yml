@@ -45,24 +45,53 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v4
 
-      - name: Get latest release or prerelease asset URL
+      - name: Resolve release asset URL
         id: get_asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           REPO="CollaborativeRoboticsLab/industrial-robots-and-systems-world"
           RELEASES_API="https://api.github.com/repos/$REPO/releases"
+          ASSET_NAME="IRS_latest.zip"
+          RELEASE_TAG=""
 
-          # Get most recent non-draft release (published or prerelease)
-          RELEASE_JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" $RELEASES_API)
-          
-          # Filter out drafts, pick the latest, and find the matching asset
-          ASSET_URL=$(echo "$RELEASE_JSON" | \
-            jq -r '[.[] | select(.draft == false)][0].assets[]? | select(.name=="IRS_latest.zip") | .url')
+          if [ "${{ github.event_name }}" = "release" ]; then
+            RELEASE_TAG="${{ github.event.release.tag_name }}"
+            echo "Using asset from triggering release $RELEASE_TAG"
+            ASSET_URL=$(jq -r --arg asset_name "$ASSET_NAME" \
+              '.release.assets[]? | select(.name == $asset_name) | .url' \
+              "$GITHUB_EVENT_PATH")
+          else
+            echo "Selecting most recently published non-draft release asset"
+            RELEASE_JSON=$(curl -fsSL \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              "$RELEASES_API")
+
+            RELEASE_TAG=$(echo "$RELEASE_JSON" | jq -r --arg asset_name "$ASSET_NAME" '
+              map(select(.draft == false and ([.assets[]?.name] | index($asset_name))))
+              | sort_by(.published_at // .created_at)
+              | reverse
+              | .[0].tag_name // empty
+              ')
+
+            ASSET_URL=$(echo "$RELEASE_JSON" | jq -r --arg asset_name "$ASSET_NAME" '
+              map(select(.draft == false))
+              | sort_by(.published_at // .created_at)
+              | reverse
+              | .[]
+              | .assets[]?
+              | select(.name == $asset_name)
+              | .url
+              ' | head -n 1)
+          fi
 
           if [ -z "$ASSET_URL" ]; then
-            echo "❌ Asset IRS_latest.zip not found in recent releases."
+            echo "❌ Asset $ASSET_NAME not found."
             exit 1
+          fi
+
+          if [ -n "$RELEASE_TAG" ]; then
+            echo "✅ Selected release version: $RELEASE_TAG"
           fi
 
           echo "✅ Found asset URL: $ASSET_URL"
