@@ -1,78 +1,69 @@
-FROM ubuntu:noble AS base
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV OPENPLC_DIR=/OpenPLC_Editor
-ENV VENV_DIR=$OPENPLC_DIR/.venv
+ENV OPENPLC_DIR=/opt/openplc-editor
+ENV ELECTRON_DISABLE_SANDBOX=1
+ENV LIBGL_ALWAYS_SOFTWARE=1
 
-# Install system dependencies
+# Install Node.js 22 and system dependencies required by Electron and native modules.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        git \
         ca-certificates \
-        libx11-6 \
-        libxext6 \
-        libxrender1 \
-        libxtst6 \
-        libxi6 \
-        libgtk-3-0 \
-        x11-xserver-utils \
-        ffmpeg \
-        libsm6 \
-        wget \
+        curl \
+        git \
+        gnupg
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y --no-install-recommends \
+        nodejs \
         build-essential \
-        bison \
-        flex \
-        autoconf \
-        automake \
-        make \
-        libgtk-3-dev \
-        libgl1-mesa-dev \
-        libglu1-mesa-dev \
         python3 \
-        python3-venv \
-        python3-dev \
-        python3-pip \
-        libxml2-dev \
-        libxslt1-dev && \
+        xvfb \
+        libasound2t64 \
+        libatk-bridge2.0-0t64 \
+        libatk1.0-0t64 \
+        libcups2t64 \
+        libdbus-1-3 \
+        libdrm2 \
+        libgbm1 \
+        libglib2.0-0t64 \
+        libgtk-3-0t64 \
+        libnss3 \
+        libnspr4 \
+        libx11-6 \
+        libx11-xcb1 \
+        libxcb1 \
+        libxcomposite1 \
+        libxcursor1 \
+        libxdamage1 \
+        libxext6 \
+        libxfixes3 \
+        libxi6 \
+        libxkbcommon0 \
+        libxrandr2 \
+        libxrender1 \
+        libxshmfence1 \
+        libxss1 \
+        libxtst6 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Clone the OpenPLC Editor repository
-RUN git clone https://github.com/CollaborativeRoboticsLab/OpenPLC_Editor.git
+# Clone the new OpenPLC Editor and install its dependencies.
+RUN git clone --depth 1 https://github.com/Autonomy-Logic/openplc-editor.git "$OPENPLC_DIR"
 
-# Initialize submodules
 WORKDIR $OPENPLC_DIR
-RUN git submodule update --init --recursive
+RUN npm install
 
-# Set up Python virtual environment and install Python packages
-RUN python3 -m venv $VENV_DIR && \
-    $VENV_DIR/bin/pip install --upgrade pip && \
-    $VENV_DIR/bin/pip install \
-        wheel jinja2 lxml future matplotlib zeroconf \
-        pyserial pypubsub pyro5 attrdict3 wxPython
+# Start the Electron app on the host X11 display when available, otherwise fall back to Xvfb.
+RUN printf '%s\n' \
+    '#!/bin/sh' \
+    'set -e' \
+    'cd "$OPENPLC_DIR"' \
+    'if [ -z "$DISPLAY" ]; then' \
+    '  export DISPLAY=:99' \
+    '  Xvfb :99 -screen 0 1920x1080x24 >/tmp/xvfb.log 2>&1 &' \
+    'fi' \
+    'exec npm run dev' \
+    > /usr/local/bin/openplc-editor && chmod +x /usr/local/bin/openplc-editor
 
-# Compile MATIEC
-WORKDIR $OPENPLC_DIR/matiec
-RUN autoreconf -i && \
-    ./configure && \
-    make -s && \
-    cp ./iec2c ../editor/arduino/bin/
-
-# Create openplc_editor.sh launcher script
-WORKDIR $OPENPLC_DIR
-RUN echo '#!/bin/bash' > openplc_editor.sh && \
-    echo 'cd "$OPENPLC_DIR"' >> openplc_editor.sh && \
-    echo 'if [ -d "./new_editor" ]; then' >> openplc_editor.sh && \
-    echo '  rm -Rf editor' >> openplc_editor.sh && \
-    echo '  rm -Rf ./matiec/lib' >> openplc_editor.sh && \
-    echo '  mv ./new_editor ./editor' >> openplc_editor.sh && \
-    echo '  mv ./new_lib ./matiec/lib' >> openplc_editor.sh && \
-    echo 'fi' >> openplc_editor.sh && \
-    echo 'source "$VENV_DIR/bin/activate"' >> openplc_editor.sh && \
-    echo 'export GDK_BACKEND=x11' >> openplc_editor.sh && \
-    echo './.venv/bin/python3 ./editor/Beremiz.py' >> openplc_editor.sh && \
-    chmod +x openplc_editor.sh
-
-# Set working directory and entrypoint
-WORKDIR $OPENPLC_DIR/editor
-ENTRYPOINT [ "../openplc_editor.sh" ]
+ENTRYPOINT ["/usr/local/bin/openplc-editor"]

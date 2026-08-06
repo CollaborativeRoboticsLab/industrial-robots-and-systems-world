@@ -15,10 +15,33 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
 
   irs-openplc-runtime:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-runtime:jazzy
+    container_name: openplc-runtime
+    image: ghcr.io/autonomy-logic/openplc-runtime:latest
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 8443:8443
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+    volumes:
+      - openplc-runtime-data:/var/run/runtime
 
+  irs-openplc-editor:
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:jazzy
+    environment:
+      - DISPLAY
+      # - QT_X11_NO_MITSHM=1
+      # - NVIDIA_VISIBLE_DEVICES=all
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    privileged: true
+    network_mode: host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./openplc_data:/openplc_data
+      
   omron_handsolo:
     container_name: omron_handsolo
     image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
@@ -54,3 +77,6 @@ services:
       - ./workspace/workspace:/workspace:rw
       - ./workspace/code-server/config:/root/.config/code-server:rw
       - ./workspace/code-server/data:/root/.local/share/code-server:rw
+
+volumes:
+  openplc-runtime-data:
