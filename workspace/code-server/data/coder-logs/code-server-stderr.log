@@ -14,3 +14,13 @@
 [2026-08-06T01:04:23.123Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
 [2026-08-06T01:04:25.129Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
 [2026-08-06T01:04:27.935Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:33.244Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:34.968Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:37.702Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:39.310Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:41.313Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:44.184Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:48.601Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:25:56.302Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:26:10.463Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-06T02:26:37.319Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
