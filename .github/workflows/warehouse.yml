@@ -50,10 +50,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
+
           REPO="CollaborativeRoboticsLab/industrial-robots-and-systems-world"
           RELEASES_API="https://api.github.com/repos/$REPO/releases"
+          LATEST_RELEASE_API="https://api.github.com/repos/$REPO/releases/latest"
           ASSET_NAME="IRS_latest.zip"
           RELEASE_TAG=""
+          ASSET_URL=""
 
           if [ "${{ github.event_name }}" = "release" ]; then
             RELEASE_TAG="${{ github.event.release.tag_name }}"
@@ -62,27 +66,38 @@ jobs:
               '.release.assets[]? | select(.name == $asset_name) | .url' \
               "$GITHUB_EVENT_PATH")
           else
-            echo "Selecting most recently published non-draft release asset"
-            RELEASE_JSON=$(curl -fsSL \
+            echo "Selecting latest published release asset"
+            LATEST_RELEASE_JSON=$(curl -fsSL \
               -H "Authorization: token $GITHUB_TOKEN" \
-              "$RELEASES_API")
+              "$LATEST_RELEASE_API")
 
-            RELEASE_TAG=$(echo "$RELEASE_JSON" | jq -r --arg asset_name "$ASSET_NAME" '
-              map(select(.draft == false and ([.assets[]?.name] | index($asset_name))))
-              | sort_by(.published_at // .created_at)
-              | reverse
-              | .[0].tag_name // empty
-              ')
-
-            ASSET_URL=$(echo "$RELEASE_JSON" | jq -r --arg asset_name "$ASSET_NAME" '
-              map(select(.draft == false))
-              | sort_by(.published_at // .created_at)
-              | reverse
-              | .[]
-              | .assets[]?
+            RELEASE_TAG=$(echo "$LATEST_RELEASE_JSON" | jq -r '.tag_name // empty')
+            ASSET_URL=$(echo "$LATEST_RELEASE_JSON" | jq -r --arg asset_name "$ASSET_NAME" '
+              .assets[]?
               | select(.name == $asset_name)
               | .url
-              ' | head -n 1)
+              ')
+
+            if [ -z "$ASSET_URL" ]; then
+              echo "Latest published release is missing $ASSET_NAME, falling back to release list"
+              RELEASE_JSON=$(curl -fsSL \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                "$RELEASES_API")
+
+              SELECTED_RELEASE=$(echo "$RELEASE_JSON" | jq -c --arg asset_name "$ASSET_NAME" '
+                map(select(.draft == false and any(.assets[]?; .name == $asset_name)))
+                | sort_by(.published_at // .created_at)
+                | reverse
+                | .[0] // empty
+                ')
+
+              RELEASE_TAG=$(echo "$SELECTED_RELEASE" | jq -r '.tag_name // empty')
+              ASSET_URL=$(echo "$SELECTED_RELEASE" | jq -r --arg asset_name "$ASSET_NAME" '
+                .assets[]?
+                | select(.name == $asset_name)
+                | .url
+                ')
+            fi
           fi
 
           if [ -z "$ASSET_URL" ]; then
@@ -100,7 +115,8 @@ jobs:
 
       - name: Download IRS_latest.zip (private/public compatible)
         run: |
-          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          set -euo pipefail
+          curl -fsSL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                -H "Accept: application/octet-stream" \
                "$ASSET_URL" -o warehouse/IRS_latest.zip
 
