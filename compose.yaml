@@ -46,9 +46,9 @@ services:
     volumes:
       - /dev:/dev:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw                    # GUI related
-      - workspace/workspace:/workspace:rw
-      - workspace/code-server/config:/root/.config/code-server:rw
-      - workspace/code-server/data:/root/.local/share/code-server:rw
+      - ./workspace/workspace:/workspace:rw
+      - ./workspace/code-server/config:/root/.config/code-server:rw
+      - ./workspace/code-server/data:/root/.local/share/code-server:rw
 
 
   irs-openplc-runtime:
@@ -75,7 +75,7 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ./openplc-data:/openplc_data
+      - ./openplc-data:/editor_data:rw
       
 volumes:
   openplc-runtime-data:

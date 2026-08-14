@@ -24,3 +24,20 @@
 [2026-08-06T02:25:56.302Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
 [2026-08-06T02:26:10.463Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
 [2026-08-06T02:26:37.319Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+File not found: /usr/lib/code-server/lib/vscode/out/vsda.js
+File not found: /usr/lib/code-server/lib/vscode/out/vsda_bg.wasm
+a socket was left hanging
+a socket was left hanging
+[00:28:54] [127.0.0.1][ff28226d][ManagementConnection] Unknown reconnection token (never seen).
+[2026-08-14T00:36:19.991Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:21.432Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:23.444Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:25.183Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:27.292Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:30.557Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:35.258Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:42.637Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:36:56.779Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:37:23.369Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:38:15.526Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080
+[2026-08-14T00:39:16.628Z] error listen EADDRINUSE: address already in use 0.0.0.0:8080

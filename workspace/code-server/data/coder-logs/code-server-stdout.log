@@ -50,3 +50,56 @@
 [2026-08-06T02:26:10.459Z] info  Using user-data-dir /root/.local/share/code-server
 [2026-08-06T02:26:37.314Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
 [2026-08-06T02:26:37.315Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:27:26.434Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:27:26.435Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:27:26.455Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-08-14T00:27:26.455Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-08-14T00:27:26.455Z] info    - Authentication is disabled
+[2026-08-14T00:27:26.455Z] info    - Not serving HTTPS
+[2026-08-14T00:27:26.455Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+[00:27:48] 
+
+
+
+
+[00:27:48] Extension host agent started.
+[00:27:48] Started initializing default profile extensions in extensions installation folder. file:///root/.local/share/code-server/extensions
+[00:27:48] Completed initializing default profile extensions in extensions installation folder. file:///root/.local/share/code-server/extensions
+[00:27:50] [127.0.0.1][ff28226d][ManagementConnection] New connection established.
+[00:27:51] [127.0.0.1][4528c4dc][ExtensionHostConnection] New connection established.
+[00:27:51] [127.0.0.1][4528c4dc][ExtensionHostConnection] <53> Launched Extension Host Process.
+[2026-08-14T00:28:46.597Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:28:46.599Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:28:46.617Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-08-14T00:28:46.617Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-08-14T00:28:46.617Z] info    - Authentication is disabled
+[2026-08-14T00:28:46.617Z] info    - Not serving HTTPS
+[2026-08-14T00:28:46.617Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+[00:28:52] 
+
+
+
+
+[00:28:52] Extension host agent started.
+[2026-08-14T00:36:19.987Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:19.988Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:21.426Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:21.428Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:23.438Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:23.440Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:25.178Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:25.179Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:27.287Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:27.288Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:30.549Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:30.551Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:35.231Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:35.239Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:42.633Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:42.634Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:36:56.771Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:36:56.775Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:37:23.365Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:37:23.366Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-14T00:38:15.522Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-14T00:39:16.623Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
