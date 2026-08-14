@@ -1,6 +1,19 @@
 services:
+  irs-openplc-runtime:
+    container_name: openplc-runtime
+    image: ghcr.io/autonomy-logic/openplc-runtime:latest
+    restart: unless-stopped
+    ports:
+      - 8443:8443
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+    volumes:
+      - openplc-runtime-data:/var/run/runtime
+      
   irs-openplc-editor:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:jazzy
+    ipc: host
     environment:
       - PYTHONUNBUFFERED=1
       - DISPLAY
@@ -12,4 +25,4 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ./openplc_data:/editor_shared_folder
+      - openplc-data:/home/ubuntu/editor_shared_folder:rw
