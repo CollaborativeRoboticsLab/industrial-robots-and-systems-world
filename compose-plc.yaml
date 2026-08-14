@@ -25,4 +25,7 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - openplc-data:/home/ubuntu/editor_shared_folder:rw
+      - ./openplc-editor/data:/editor_data:rw
+
+volumes:
+  openplc-runtime-data:
