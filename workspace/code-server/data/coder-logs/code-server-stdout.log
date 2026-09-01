@@ -141,3 +141,17 @@
 [2026-08-14T01:56:28.631Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
 =======
 >>>>>>> 7106c255eb23ff6e3f2d4528ae9264fcb5068ac8
+[2026-08-18T01:01:00.395Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-18T01:01:00.412Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-18T01:01:00.497Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-08-18T01:01:00.506Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-08-18T01:01:00.506Z] info    - Authentication is disabled
+[2026-08-18T01:01:00.506Z] info    - Not serving HTTPS
+[2026-08-18T01:01:00.506Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+[2026-08-18T01:02:27.986Z] info  code-server 4.91.0 fb3e3e1546d571e9973e86482bcd925c1918ec27
+[2026-08-18T01:02:27.987Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-08-18T01:02:28.013Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-08-18T01:02:28.013Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-08-18T01:02:28.013Z] info    - Authentication is disabled
+[2026-08-18T01:02:28.013Z] info    - Not serving HTTPS
+[2026-08-18T01:02:28.013Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
