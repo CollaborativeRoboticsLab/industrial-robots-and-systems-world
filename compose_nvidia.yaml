@@ -1,6 +1,7 @@
 services:
   irs-simulation:
     image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-warehouse:jazzy
+    runtime: nvidia
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
@@ -13,27 +14,40 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - /dev/dri:/dev/dri:rw
+    devices:
+      - /dev/dri:/dev/dri
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    shm_size: '8gb'
 
   omron_handsolo:
     container_name: omron_handsolo
     image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
     command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_arm:=true use_base:=true use_moveit:=true use_nav2:=true use_rviz:=false
     environment:
-      - PYTHONUNBUFFERED=1                # GUI related
+      - PYTHONUNBUFFERED=1
       - DISPLAY                           # GUI related
       - QT_X11_NO_MITSHM=1                # GUI related
-      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
-      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
       - ROS_DOMAIN_ID=0
     restart: unless-stopped
     privileged: true
     network_mode: host
     volumes:
-      - /dev:/dev
+      - /dev:/dev                           # hardware access (arm/base serial)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+    shm_size: '2gb'
 
   omron-workspace:
     image: ghcr.io/collaborativeroboticslab/omron-workspace:jazzy
+    runtime: nvidia
     environment:
       - DISPLAY
       - ROS_DOMAIN_ID=0
@@ -41,16 +55,29 @@ services:
       - ROS_DISCOVERY_SERVER=                   # clear image default 127.0.0.1:11811 (no server exists)
       - NO_AT_BRIDGE=1
       - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
+      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
     restart: unless-stopped
     tty: true
     stdin_open: true
     network_mode: host
     volumes:
-      - /dev:/dev:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw                    # GUI related
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - /dev/dri:/dev/dri:rw
       - ./workspace/workspace:/workspace:rw
       - ./workspace/code-server/config:/root/.config/code-server:rw
       - ./workspace/code-server/data:/root/.local/share/code-server:rw
+    devices:
+      - /dev/dri:/dev/dri
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    shm_size: '4gb'
 
   irs-openplc-runtime:
     container_name: openplc-runtime
@@ -78,6 +105,7 @@ services:
     network_mode: host
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
       - ./openplc-editor/data:/editor_data:rw
 
 volumes:
