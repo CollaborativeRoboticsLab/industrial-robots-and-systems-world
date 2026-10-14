@@ -37,6 +37,8 @@ services:
     environment:
       - DISPLAY
       - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp   # match sim/handsolo (image default is fastrtps)
+      - ROS_DISCOVERY_SERVER=                   # clear image default 127.0.0.1:11811 (no server exists)
       - NO_AT_BRIDGE=1
       - QT_X11_NO_MITSHM=1
     restart: unless-stopped
@@ -77,6 +79,6 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./openplc-editor/data:/editor_data:rw
-      
+
 volumes:
   openplc-runtime-data:
