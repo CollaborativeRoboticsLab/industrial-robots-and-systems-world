@@ -42,17 +42,22 @@ Start the docker containers
 docker compose up
 ```
 
-## Start the editor
+If the host machine contains a nvidia GPU, you can also start the docker containers with GPU support using the following command
+
+```bash
+docker compose -f compose-nvidia.yaml up
+``` 
+
+## Start the editor and runtime only
 
 Enter the folder
-
 ```bash
 cd industrial-robots-and-systems-world
 ```
 
 Pull the latest docker containers
 ```bash
-docker compose -f compose-editor.yaml pull
+docker compose -f compose-plc.yaml pull
 ```
 
 Allow permission for UI interfaces from docker containers
@@ -62,7 +67,7 @@ xhost +local:root
 
 Start the docker containers
 ```bash
-docker compose -f compose-editor.yaml up
+docker compose -f compose-plc.yaml up
 ```
 
 ## Accessing the st files created by editor
