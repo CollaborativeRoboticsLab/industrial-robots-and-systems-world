@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV OPENPLC_DIR=/opt/openplc-editor
 ENV ELECTRON_DISABLE_SANDBOX=1
 ENV LIBGL_ALWAYS_SOFTWARE=1
-ARG OPENPLC_EDITOR_VERSION=v4.2.11
+ARG OPENPLC_EDITOR_VERSION=v4.3.3
 
 # Install Node.js 22 and system dependencies required by Electron and native modules.
 RUN apt-get update && \
