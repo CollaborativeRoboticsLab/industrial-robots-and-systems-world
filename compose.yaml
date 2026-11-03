@@ -17,7 +17,7 @@ services:
   omron_handsolo:
     container_name: omron_handsolo
     image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
-    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_arm:=true use_base:=true use_moveit:=true use_nav2:=true use_rviz:=true
+    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=true use_moveit:=true use_nav2:=true use_rviz:=true
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
@@ -54,7 +54,7 @@ services:
 
   irs-openplc-runtime:
     container_name: openplc-runtime
-    image: ghcr.io/autonomy-logic/openplc-runtime:latest
+    image: ghcr.io/autonomy-logic/openplc-runtime:v4.2.4
     restart: unless-stopped
     network_mode: host
     privileged: true
@@ -67,7 +67,7 @@ services:
       - openplc-runtime-data:/var/run/runtime
 
   irs-openplc-editor:
-    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:jazzy
+    image: ghcr.io/collaborativeroboticslab/industrial-robots-and-systems-openplc-editor:v4.2.11
     ipc: host
     environment:
       - DISPLAY
